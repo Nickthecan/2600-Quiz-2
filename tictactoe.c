@@ -19,12 +19,38 @@ void printWinner(char);
 
 int main() {
 
-    
+    //place holder for the winner
+    char winner = ' ';
+
     //prompt user if they want solo or multiplayer
     printf("Welcome to TicTacToe\nPlease choose an option\n--------------------------------------\nSingleplayer: Press 1\nMultiplayer : Press 2");
     //read information from console
 
     //play 
+    //reset the board
+    resetBoard();
+
+    //for singleplayer
+    while(winner == ' ' && checkFreeSpaces() != 0) {
+        //show the board
+        printBoard();   
+        //allow player to choose which square they want
+        //populate the square with x
+        //update the board
+        playerMove();
+        winner = checkWinner(); //repeat until one person gets 3 in a row or all the squares fill up
+        if (winner != ' ' || checkFreeSpaces() ==0) {
+            break;
+        }
+        //the computer will choose a square by random (make sure it's empty tho)
+        //populate the square with o
+        //update the board
+        computerMove();
+        winner = checkWinner(); //repeat until one person gets 3 in a row or all the squares fill up
+        if (winner != ' ' || checkFreeSpaces() ==0) {
+            break;
+        }
+    }
 
     /*for multiplayer
         show the board
@@ -38,17 +64,6 @@ int main() {
         or all the squares fill up
     */
 
-    /*for singleplayer
-        show the board
-        allow player to choose which square they want
-        populate the square with x
-        update the board
-        the computer will choose a square by random (make sure it's empty tho)
-        populate the square with o
-        update the board
-        repeat until one person gets 3 in a row
-        or all the squares fill up
-    */
     return 0;
 }
 
