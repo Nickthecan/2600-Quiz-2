@@ -138,3 +138,45 @@ void computerMove() {
         printWinner(' ');
     }
 }  //end computerMoves method
+
+char checkWinner() {
+    //check rows
+    for(int i = 0; i < 3; i++) {
+        if (board[i][0] == board[i][1] && board[i][0] == board[i][2]) {
+            return board[i][0];
+        }
+    }
+    //check columns
+    for(int i = 0; i < 3; i++) {
+        if (board[0][i] == board[1][i] && board[0][i] == board[2][i]) {
+            return board[0][i];
+        }
+    }
+    //check diagonals
+     if (board[0][0] == board[1][1] && board[0][0] == board[2][2]) {
+            return board[0][0];
+        }
+    if (board[0][2] == board[1][1] && board[0][2] == board[2][0]) {
+            return board[0][2];
+        }
+    return ' ';
+} //end checkWinner method
+
+void printWinner(char winner) {
+    //if player 1 wins
+    if (winner == PLAYER1) {
+        printf("PLAYER 1 WINS!");
+    }
+    //if player 2 wins
+    else if (winner == PLAYER2) {
+        printf("PLAYER 2 WINS!");
+    }
+    //if the computer wins
+    else if (winner == COMPUTER) {
+        printf("COMPUTER WINS!");
+    }
+    //if it is a tie
+    else {
+        printf("IT IS A TIE!");
+    }
+} //end printWinner method
