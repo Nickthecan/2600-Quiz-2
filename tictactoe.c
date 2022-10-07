@@ -1,9 +1,27 @@
 //Tic Tac Toe game between two players or player vs. cpu
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <time.h>
+
+char board[3][3];
+const char PLAYER1 = 'X';
+const char PLAYER2 = 'O';
+const char COMPUTER = 'O';
+
+void resetBoard();
+void printBoard();
+int checkFreeSpaces();
+void playerMove();
+void computerMove();
+char checkWinner();
+void printWinner(char);
 
 int main() {
 
+    
     //prompt user if they want solo or multiplayer
-
+    printf("Welcome to TicTacToe\nPlease choose an option\n--------------------------------------\nSingleplayer: Press 1\nMultiplayer : Press 2");
     //read information from console
 
     //play 
