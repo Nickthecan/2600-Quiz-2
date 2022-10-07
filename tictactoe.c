@@ -91,3 +91,50 @@ int checkFreeSpaces() {
     //return the amount of free spaces 
     return freeSpaces;
 }  //end checkFreeSpaces method
+
+void playerMove() {
+    //instantiating varaibles
+    int x;
+    int y;
+    //do while loop to allow a player to enter their choice starting from row then column
+    do {
+        printf("Enter row number 1-3: ");
+        scanf("%d", &x);
+        x--;
+        printf("Enter column number 1-3: ");
+        scanf("%d", &y);
+        y--;
+        //if statement to make sure the user did not input their choice in a filled spot
+        if(board[x][y] != ' ') {
+            printf("Invalid Move!\n");
+        }
+        else {
+            board[x][y] = PLAYER1;
+            break;
+        }
+    }
+    while (board[x][y] != ' ');
+}  //end playerMove method
+
+void computerMove() {
+    //in order to generate random, use a seed based on current time
+    srand(time(0));
+    //instantiating variables
+    int x;
+    int y;
+    //computer checks to see if the spaces are not all filled up
+    if(checkFreeSpaces() > 0) {
+        do {
+            //random number in order to fill a row and column
+            x = rand() % 3;
+            y = rand() % 3;
+        }
+        while (board[x][y] != ' ');
+
+        board[x][y] = COMPUTER;
+    }
+    else {
+        //no one wins yet
+        printWinner(' ');
+    }
+}  //end computerMoves method
