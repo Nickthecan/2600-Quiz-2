@@ -53,18 +53,41 @@ int main() {
 }
 
 void resetBoard() {
+    //loop through the row
     for(int i = 0; i < 3; i++) {
+        //loop through the column
         for (int j = 0; j < 3; j++) {
+            //turn every x and o to an empty space
             board[i][j] = ' ';
         }
     }
-}
+}  //end resetBoard method
 
 void printBoard() {
+    //print out the board
     printf(" %c | %c | %c ", board[0][0], board[0][1], board[0][2]);
     printf("\n---|---|---\n");
     printf(" %c | %c | %c ", board[1][0], board[1][1], board[1][2]);
     printf("\n---|---|---\n");
     printf(" %c | %c | %c ", board[2][0], board[2][1], board[2][2]);
     printf("\n");
-}
+}  //end printBoard method
+
+int checkFreeSpaces() {
+    //amount of spaces in the board
+    int freeSpaces = 9;
+
+    //loop through the row
+    for(int i = 0; i < 3; i++) {
+        //loop for the column
+        for (int j = 0; j < 3; j++) {
+            //test to see if the board has an empty space
+            if (board[i][j] != ' ') {
+                //decrement the amount of free spaces that are found on the board
+                freeSpaces--;
+            }
+        }
+    }
+    //return the amount of free spaces 
+    return freeSpaces;
+}  //end checkFreeSpaces method
