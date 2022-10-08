@@ -21,7 +21,7 @@ int main() {
 
     //place holder for the winner
     char winner = ' ';
-
+    
     //prompt user if they want solo or multiplayer
     printf("Welcome to TicTacToe\nPlease choose an option\n--------------------------------------\nSingleplayer: Press 1\nMultiplayer : Press 2");
     //read information from console
@@ -51,6 +51,8 @@ int main() {
             break;
         }
     }
+    printBoard();
+    printWinner(winner);
 
     /*for multiplayer
         show the board
@@ -181,10 +183,6 @@ void printWinner(char winner) {
     //if player 1 wins
     if (winner == PLAYER1) {
         printf("PLAYER 1 WINS!");
-    }
-    //if player 2 wins
-    else if (winner == PLAYER2) {
-        printf("PLAYER 2 WINS!");
     }
     //if the computer wins
     else if (winner == COMPUTER) {
