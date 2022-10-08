@@ -9,24 +9,41 @@ const char PLAYER1 = 'X';
 const char PLAYER2 = 'O';
 const char COMPUTER = 'O';
 
+void singlePlayer();
+void multiPlayer();
 void resetBoard();
 void printBoard();
 int checkFreeSpaces();
 void playerMove();
+void player2Move();
 void computerMove();
 char checkWinner();
 void printWinner(char);
+void print2Winner(char);
 
 int main() {
-
-    //place holder for the winner
-    char winner = ' ';
+    int option = ' ';
     
     //prompt user if they want solo or multiplayer
-    printf("Welcome to TicTacToe\nPlease choose an option\n--------------------------------------\nSingleplayer: Press 1\nMultiplayer : Press 2");
+    printf("Welcome to TicTacToe\nPlease choose an option\n--------------------------------------\nSingleplayer: Press 1\nMultiplayer : Press 2\n");
     //read information from console
+    scanf("%d", option);
 
-    //play 
+    if (option == 1) {
+        singlePlayer();
+    }
+
+    if (option == 2) {
+        multiPlayer();
+    }
+
+    return 0;
+}
+
+void singlePlayer() {
+   //place holder for the winner
+    char winner = ' ';
+
     //reset the board
     resetBoard();
 
@@ -53,7 +70,9 @@ int main() {
     }
     printBoard();
     printWinner(winner);
+}
 
+void multiPlayer() {
     /*for multiplayer
         show the board
         allow player one to choose which square they want.
@@ -66,7 +85,35 @@ int main() {
         or all the squares fill up
     */
 
-    return 0;
+    //place holder for the winner
+    char winner = ' ';
+
+    //reset the board
+    resetBoard();
+
+    //for singleplayer
+    while(winner == ' ' && checkFreeSpaces() != 0) {
+        //show the board
+        printBoard();   
+        //allow player to choose which square they want
+        //populate the square with x
+        //update the board
+        playerMove();
+        winner = checkWinner(); //repeat until one person gets 3 in a row or all the squares fill up
+        if (winner != ' ' || checkFreeSpaces() ==0) {
+            break;
+        }
+        //the computer will choose a square by random (make sure it's empty tho)
+        //populate the square with o
+        //update the board
+        player2Move();
+        winner = checkWinner(); //repeat until one person gets 3 in a row or all the squares fill up
+        if (winner != ' ' || checkFreeSpaces() ==0) {
+            break;
+        }
+    }
+    printBoard();
+    print2Winner(winner);
 }
 
 void resetBoard() {
@@ -82,7 +129,7 @@ void resetBoard() {
 
 void printBoard() {
     //print out the board
-    printf(" %c | %c | %c ", board[0][0], board[0][1], board[0][2]);
+    printf("\n %c | %c | %c ", board[0][0], board[0][1], board[0][2]);
     printf("\n---|---|---\n");
     printf(" %c | %c | %c ", board[1][0], board[1][1], board[1][2]);
     printf("\n---|---|---\n");
@@ -127,6 +174,30 @@ void playerMove() {
         }
         else {
             board[x][y] = PLAYER1;
+            break;
+        }
+    }
+    while (board[x][y] != ' ');
+}  //end playerMove method
+
+void player2Move() {
+    //instantiating varaibles
+    int x;
+    int y;
+    //do while loop to allow a player to enter their choice starting from row then column
+    do {
+        printf("Enter row number 1-3: ");
+        scanf("%d", &x);
+        x--;
+        printf("Enter column number 1-3: ");
+        scanf("%d", &y);
+        y--;
+        //if statement to make sure the user did not input their choice in a filled spot
+        if(board[x][y] != ' ') {
+            printf("Invalid Move!\n");
+        }
+        else {
+            board[x][y] = PLAYER2;
             break;
         }
     }
@@ -193,3 +264,19 @@ void printWinner(char winner) {
         printf("IT IS A TIE!");
     }
 } //end printWinner method
+
+void print2Winner(char winner) {
+    //if player 1 wins
+    if (winner == PLAYER1) {
+        printf("PLAYER 1 WINS!");
+    }
+    //if player 2 wins
+    else if (winner == PLAYER2) {
+        printf("PLAYER 2 WINS!");
+    }
+    //if it is a tie
+    else {
+        printf("IT IS A TIE!");
+    }
+} //end print2Winner method
+
