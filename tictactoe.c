@@ -279,4 +279,3 @@ void print2Winner(char winner) {
         printf("IT IS A TIE!");
     }
 } //end print2Winner method
-
